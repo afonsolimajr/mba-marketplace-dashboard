@@ -11,6 +11,9 @@ export default function Home() {
         <p>
           <NavLink to="signin">Sign In</NavLink>
         </p>
+        <p>
+          <NavLink to="signup">Sign Up</NavLink>
+        </p>
       </nav>
     </div>
   );

@@ -4,6 +4,7 @@ import SignIn from "./pages/auth/sign-in";
 import AppLayout from "./pages/_layouts/app-layout";
 import AuthLayout from "./pages/_layouts/auth-layout";
 import Home from "./pages/home/home";
+import SignUp from "./pages/auth/sign-up";
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
       </Route>
       <Route element={<AuthLayout />}>
         <Route path="signin" element={<SignIn />} />
+        <Route path="signup" element={<SignUp />} />
       </Route>
     </Routes>
   );
