@@ -8,15 +8,17 @@ import SignUp from "./pages/auth/sign-up";
 
 export default function AppRoutes() {
   return (
-    <Routes>
-      <Route element={<AppLayout />}>
-        <Route index element={<Home />} />
-        <Route path="dashboard" element={<Dashboard />} />
-      </Route>
-      <Route element={<AuthLayout />}>
-        <Route path="signin" element={<SignIn />} />
-        <Route path="signup" element={<SignUp />} />
-      </Route>
-    </Routes>
+    <div className="flex flex-col w-full">
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<Home />} />
+          <Route path="dashboard" element={<Dashboard />} />
+        </Route>
+        <Route element={<AuthLayout />}>
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
