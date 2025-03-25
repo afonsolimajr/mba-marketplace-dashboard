@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { ArrowRight, Search, X } from "lucide-react";
+import OrderDetail from "./OrderDetail";
 
 export default function OrderListItem() {
   return (
@@ -17,10 +19,15 @@ export default function OrderListItem() {
 
       <div className="flex items-center gap-2 p-2">
         <div className="w-16">
-          <Button variant="outline" size="sm">
-            <Search className="h-3 w-3" />
-            <span className="sr-only">Detalhes do pedido</span>
-          </Button>
+          <Dialog>
+            <DialogTrigger>
+              <Button variant="outline" size="sm">
+                <Search className="h-3 w-3" />
+                <span className="sr-only">Detalhes do pedido</span>
+              </Button>
+            </DialogTrigger>
+            <OrderDetail />
+          </Dialog>
         </div>
         <span className="w-36 font-mono text-xs font-medium">
           1315a4sdf64as6d4
