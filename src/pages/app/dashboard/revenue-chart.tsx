@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart } from "lucide-react";
 import {
   CartesianGrid,
   Line,
@@ -22,11 +23,12 @@ export default function RevenueChart() {
 
   return (
     <Card className="col-span-6">
-      <CardHeader className="flex-row items-center justify-between pb-8">
-        <div className="space-y-1">
+      <CardHeader className="pb-8">
+        <div className="flex items-center justify-between">
           <CardTitle className="text-base font-medium">
-            Receita no período
+            Receita no perído
           </CardTitle>
+          <BarChart className="w-4 h-4 text-muted-foreground" />
         </div>
       </CardHeader>
       <CardContent>

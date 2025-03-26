@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BarChart } from "lucide-react";
 import { PieChart, Pie, ResponsiveContainer, Cell } from "recharts";
 import colors from "tailwindcss/colors";
 
@@ -26,6 +27,7 @@ export default function PopularProductsChart() {
           <CardTitle className="text-base font-medium">
             Produtos Populares
           </CardTitle>
+          <BarChart className="w-4 h-4 text-muted-foreground" />
         </div>
       </CardHeader>
       <CardContent>
