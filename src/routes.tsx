@@ -6,6 +6,7 @@ import AuthLayout from "./pages/_layouts/auth-layout";
 import Home from "./pages/home/home";
 import SignUp from "./pages/auth/sign-up";
 import Orders from "./pages/app/orders/orders";
+import NotFound from "./pages/404";
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,8 @@ export default function AppRoutes() {
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
+        {/* Rota para páginas não encontradas */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
