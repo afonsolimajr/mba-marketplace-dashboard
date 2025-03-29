@@ -1,6 +1,8 @@
+import { signIn } from "@/api/sign-in";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { toast } from "sonner";
@@ -20,10 +22,17 @@ export default function SignIn() {
     formState: { isSubmitting },
   } = useForm<SignInForm>();
 
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: signIn,
+  });
+
   async function handleSignIn(data: SignInForm) {
-    console.log(data);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    toast.success("Link de acesso enviado para seu email");
+    try {
+      await authenticate({ email: data.email });
+      toast.success("Link de acesso enviado para seu email");
+    } catch {
+      toast.error("Credenciais inválidas");
+    }
   }
 
   return (
