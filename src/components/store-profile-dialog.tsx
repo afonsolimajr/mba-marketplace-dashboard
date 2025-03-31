@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./ui/button";
 import {
   DialogClose,
@@ -43,8 +43,21 @@ export default function StoreProfileDialog() {
     },
   });
 
+  const queryClient = useQueryClient();
+
   const { mutateAsync: updateProfileFn } = useMutation({
     mutationFn: updateProfile,
+    onSuccess(_, { name, description }) {
+      const cached = queryClient.getQueryData(["managed-restaurant"]);
+
+      if (cached) {
+        queryClient.setQueryData(["managed-restaurant"], {
+          ...cached,
+          name,
+          description,
+        });
+      }
+    },
   });
 
   function handleSubmitProfile(data: StoreProfileType) {
