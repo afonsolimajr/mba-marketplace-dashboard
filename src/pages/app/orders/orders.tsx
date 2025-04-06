@@ -1,7 +1,14 @@
+import { useQuery } from "@tanstack/react-query";
 import OrderFilter from "./OrderFilter";
 import OrderListItem from "./OrderListItem";
+import { getOrders } from "@/api/get-orders";
 
 export default function Orders() {
+  const { data: result } = useQuery({
+    queryKey: ["orders"],
+    queryFn: getOrders,
+  });
+
   return (
     <div>
       <div className="flex flex-col gap-4">
@@ -21,9 +28,10 @@ export default function Orders() {
             <span className="w-24"></span>
           </div>
         </div>
-        {Array.from({ length: 5 }).map((_, index) => {
-          return <OrderListItem key={index} />;
-        })}
+        {result &&
+          result.orders.map((order, index) => {
+            return <OrderListItem key={index} order={order} />;
+          })}
       </div>
     </div>
   );
