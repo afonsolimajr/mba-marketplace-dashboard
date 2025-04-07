@@ -3,12 +3,29 @@ import OrderFilter from "./OrderFilter";
 import OrderListItem from "./OrderListItem";
 import { getOrders } from "@/api/get-orders";
 import Pagination from "@/components/pagination";
+import { useSearchParams } from "react-router";
+import { z } from "zod";
 
 export default function Orders() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const pageIndex = z.coerce
+    .number()
+    .transform((page) => page - 1)
+    .parse(searchParams.get("page") ?? "1");
+
   const { data: result } = useQuery({
-    queryKey: ["orders"],
-    queryFn: () => getOrders({ pageIndex: 1 }),
+    queryKey: ["orders", pageIndex],
+    queryFn: () => getOrders({ pageIndex }),
   });
+
+  function handlePaginate(pageIndex: number) {
+    setSearchParams((prev) => {
+      prev.set("page", (pageIndex + 1).toString());
+
+      return prev;
+    });
+  }
 
   return (
     <div>
@@ -32,7 +49,14 @@ export default function Orders() {
                 return <OrderListItem key={index} order={order} />;
               })}
           </div>
-          <Pagination pageIndex={0} perPage={10} totalCount={56} />
+          {result && (
+            <Pagination
+              pageIndex={result?.meta.pageIndex}
+              perPage={result?.meta.perPage}
+              totalCount={result?.meta.totalCount}
+              onPageChange={handlePaginate}
+            />
+          )}
         </div>
       </div>
     </div>
